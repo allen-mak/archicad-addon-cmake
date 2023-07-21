@@ -4,6 +4,8 @@
 #include "ResourceIds.hpp"
 #include "DGModule.hpp"
 
+#include "MigrationUtils.hpp"
+
 static const GSResID AddOnInfoID			= ID_ADDON_INFO;
 	static const Int32 AddOnNameID			= 1;
 	static const Int32 AddOnDescriptionID	= 2;
@@ -92,12 +94,12 @@ API_AddonType __ACDLL_CALL CheckEnvironment (API_EnvirParams* envir)
 
 GSErrCode __ACDLL_CALL RegisterInterface (void)
 {
-	return ACAPI_Register_Menu (AddOnMenuID, 0, MenuCode_Tools, MenuFlag_Default);
+	return Register_Menu (AddOnMenuID, 0, MenuCode_Tools, MenuFlag_Default);
 }
 
 GSErrCode __ACENV_CALL Initialize (void)
 {
-	return ACAPI_Install_MenuHandler (AddOnMenuID, MenuCommandHandler);
+	return Install_MenuHandler (AddOnMenuID, MenuCommandHandler);
 }
 
 GSErrCode __ACENV_CALL FreeData (void)
