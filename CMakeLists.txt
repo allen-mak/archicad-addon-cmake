@@ -2,34 +2,6 @@ cmake_minimum_required (VERSION 3.16)
 
 include (Tools/CMakeCommon.cmake)
 
-function (LinkACAP_STATLibraries target ac_version)
-	if (${ac_version} GREATER_EQUAL "27")
-		if (WIN32)
-			target_link_libraries (AddOn
-				"$<$<CONFIG:Debug>:${AC_API_DEVKIT_DIR}/Lib/ACAP_STATD.lib>"
-				"$<$<CONFIG:Release>:${AC_API_DEVKIT_DIR}/Lib/ACAP_STAT.lib>"
-				"$<$<CONFIG:RelWithDebInfo>:${AC_API_DEVKIT_DIR}/Lib/ACAP_STAT.lib>"
-			)
-		else ()
-			target_link_libraries (AddOn
-				"${AC_API_DEVKIT_DIR}/Lib/libACAP_STAT.a"
-			)
-		endif ()
-	else ()
-		if (WIN32)
-			target_link_libraries (AddOn
-				"$<$<CONFIG:Debug>:${AC_API_DEVKIT_DIR}/Lib/Win/ACAP_STATD.lib>"
-				"$<$<CONFIG:Release>:${AC_API_DEVKIT_DIR}/Lib/Win/ACAP_STAT.lib>"
-				"$<$<CONFIG:RelWithDebInfo>:${AC_API_DEVKIT_DIR}/Lib/Win/ACAP_STAT.lib>"
-			)
-		else ()
-			target_link_libraries (AddOn
-				"${AC_API_DEVKIT_DIR}/Lib/Mactel/libACAP_STAT.a"
-			)
-		endif ()
-	endif ()
-endfunction ()
-
 set (API_DEVKIT_DIR $ENV{AC_API_DEVKIT_DIR})
 
 if (GITHUB_BUILD)
